@@ -10,12 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - uses: microsoft/playwright-github-action@v1
 
-      - name: Install dependecies
-        run: npm install
-
-      - name: run test
-        run: npm test
+      - name: Install dependencies and run tests
+        run: npm install && npm test
 
 
