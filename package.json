@@ -1,8 +1,7 @@
 {
   "name": "mrx",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Automation test for Dynamics 365 CE using Playwright",
   "directories": {
     "test": "tests"
   },
@@ -11,9 +10,7 @@
     "@playwright/test": "^1.15.2"
   },
   "scripts": {
-    "test": "playwright test",
-    "record": "npx playwright codegen"
+    "test": "playwright test"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Min Rao"
 }
