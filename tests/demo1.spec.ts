@@ -16,7 +16,7 @@ test('test', async ({ page }) => {
   await mrx.ribbon.click("Refresh");
 
   await mrx.form.bpf.moveNext();
-  await mrx.form.bpf.moveBack();
+  await mrx.form.bpf.moveBack();  
   await mrx.form.bpf.moveNext();
   await mrx.form.bpf.moveNext();
   await mrx.form.bpf.finish();
