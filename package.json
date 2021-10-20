@@ -1,0 +1,19 @@
+{
+  "name": "mrx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@playwright/test": "^1.15.2"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "record": "npx playwright codegen"
+  },
+  "author": "",
+  "license": "ISC"
+}
