@@ -12,15 +12,15 @@ export class Dialog {
     }
 
     get title() {
-        return async () => {
+        return (async () => {
             return (await this.dailog.locator(`h1#dialogTitleText`)).getAttribute("aria-label");
-        };
+        })();
     }
 
     get message() {
-        return async () => {
+        return (async () => {
             return (await this.dailog.locator(`span#dialogMessageText`)).textContent();
-        };
+        })();
     }
 
     async confirm() {

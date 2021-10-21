@@ -8,13 +8,20 @@ export class HomeGrid {
     private readonly homeGrid: Locator;
     private readonly viewName: Locator;
     private readonly viewSelectorContainer: Locator;
+    private readonly firstPageButton: Locator;
+    private readonly prePageButton: Locator;
+    private readonly nextPageButton: Locator;
+    private readonly searchBox: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.homeGrid = page.locator(`div[data-id="GridRoot"]`);
         this.viewName = this.homeGrid.locator("h1");
         this.viewSelectorContainer = page.locator(`div[data-id^=ViewSelector]`).first();
-
+        this.firstPageButton = this.homeGrid.locator(`i[data-icon-name="Previous"]`);
+        this.prePageButton = this.homeGrid.locator(`i[data-icon-name="Back"]`);
+        this.nextPageButton = this.homeGrid.locator(`i[data-icon-name="Forward"]`);
+        this.searchBox = this.homeGrid.locator('input[data-id^="quickFind"]');
     }
 
     async getCurrentView() {
@@ -26,19 +33,7 @@ export class HomeGrid {
         await clickLocatorByFullText(
             this.viewSelectorContainer.locator(`span:has-text("${viewname}")`), 
             viewname);
-        await this.page.waitForTimeout(Constants.thinkTime);
-    }
-
-    async firstPage() {
-        
-    }
-
-    async nextPage() {
-        
-    }
-
-    async prePage() {
-        
+        await this.page.waitForLoadState('networkidle');
     }
 
     async openRecord(rowIndex) {
@@ -47,8 +42,24 @@ export class HomeGrid {
         await this.page.waitForTimeout(Constants.thinkTime);
     }
 
-    async refresh() {
-        
+    async firstPage() {
+        await this.firstPageButton.click();
+        await this.page.waitForTimeout(Constants.thinkTime);
     }
-    
+
+    async prePage() {
+        await this.prePageButton.click();
+        await this.page.waitForTimeout(Constants.thinkTime);
+    }
+
+    async nextPage() {
+        await this.nextPageButton.click();
+        await this.page.waitForTimeout(Constants.thinkTime);
+    }
+
+    async search(value) {
+        await this.searchBox.fill(value);
+        await this.page.keyboard.press('Enter');
+        await this.page.waitForTimeout(Constants.thinkTime);
+    }
 }
