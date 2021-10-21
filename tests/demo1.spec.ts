@@ -1,11 +1,10 @@
-const { test, expect } = require('@playwright/test');
-import { Mrx } from '../mrx/index';
+import test from '../mrx/index';
 
-test('test', async ({ page }) => {
-  const mrx = new Mrx(page);
+
+test.skip('test', async ({ mrx }) => {
 
   // await mrx.action.login(url, username, password);
-  await page.goto("https://mrxftdev.crm7.dynamics.com/main.aspx?appid=5e45baba-3630-ec11-b6e6-000d3ace4123");
+  await mrx.action.login("https://mrxftdev.crm7.dynamics.com/main.aspx?appid=5e45baba-3630-ec11-b6e6-000d3ace4123");
 
   await mrx.sitemap.click("Automations");
   await mrx.sitemap.close();
@@ -15,14 +14,12 @@ test('test', async ({ page }) => {
 
   await mrx.ribbon.click("Refresh");
 
-  await mrx.form.bpf.moveNext();
-  await mrx.form.bpf.moveBack();  
-  await mrx.form.bpf.moveNext();
-  await mrx.form.bpf.moveNext();
+  await mrx.form.bpf.nextStage();
+  await mrx.form.bpf.nextStage();
   await mrx.form.bpf.finish();
-  await mrx.ribbon.click("Process","Reactivate")
-  await mrx.form.bpf.moveBack();
-  await mrx.form.bpf.moveBack();
+  await mrx.ribbon.click("Process","Reactivate");
+  await mrx.form.bpf.preStage();
+  await mrx.form.bpf.preStage();
 
   await mrx.form.tab.setFocus("Details");
   /*  Checkbox toggle */
@@ -37,7 +34,7 @@ test('test', async ({ page }) => {
   /*  Rating */
   /*  Duration */
   await mrx.form.getAttribute("mrx_email").setValue("test@test.com");
-  /*  Whole number input */
+  /*  Whole number input pcf */
   await mrx.form.getAttribute("mrx_whole1").setValue("200");
   await mrx.form.getAttribute("mrx_floatingpoint").setValue("300.12");
   await mrx.form.getAttribute("mrx_language").setValue("1041");
@@ -51,6 +48,6 @@ test('test', async ({ page }) => {
   await mrx.form.getAttribute("mrx_timezone").setValue("2");
   await mrx.form.getAttribute("mrx_url").setValue("www.microsoft.com");
 
-  // await page.pause();
+  // await mrx.pause();
 
 });

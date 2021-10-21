@@ -41,7 +41,6 @@ export class Sitemap {
     }
 
     async click(displayName) {
-        await this.page.waitForLoadState('networkidle');
         await this.open();
         const menu = await this.sitemap.locator(`li[data-text="${displayName}"]`);
         await menu.click();

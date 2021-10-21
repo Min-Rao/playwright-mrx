@@ -2,14 +2,15 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
-  timeout: 60000,
-  retries: 0,
-  reporter: [["dot"]],
+  timeout: 30000,
+  retries: 1,
+  reporter: [["list"]],
   workers: 3,
   use: {
+    trace: 'retain-on-failure',
     channel: 'msedge',
-    screenshot: "only-on-failure",
-    // video: "retain-on-failure",
+    // screenshot: "only-on-failure",
+    video: "retain-on-failure",
     storageState: 'auth.json',
     launchOptions: {
       headless: true,
@@ -17,7 +18,7 @@ const config: PlaywrightTestConfig = {
       devtools: false,
     },
     viewport: {
-      width: 1920, height: 1200
+      width: 1280, height: 800
     },
   },
 };

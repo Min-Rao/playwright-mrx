@@ -6,11 +6,11 @@ export class LoginPage {
     readonly userNameInput: Locator;
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
-    readonly url:string;
-    readonly username:string;
-    readonly password:string;
+    readonly url: string;
+    readonly username: string;
+    readonly password: string;
 
-    constructor(page: Page, url: string, username:string, password: string) {
+    constructor(page: Page, url: string, username?: string, password?: string) {
         this.page = page;
         this.userNameInput = page.locator(`input[type='email']`);
         this.passwordInput = page.locator(`input[type='password']`);
@@ -37,9 +37,10 @@ export class LoginPage {
 
     async login() {
         await this.page.goto(this.url);
-        await this.setUsername();
-        await this.setPassword();
-        await this.submit();
-        await this.page.waitForLoadState('networkidle');
+        if (this.username && this.password) {
+            await this.setUsername();
+            await this.setPassword();
+            await this.submit();
+        }
     }
 }

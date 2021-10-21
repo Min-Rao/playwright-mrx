@@ -12,6 +12,6 @@ jobs:
       - uses: actions/setup-node@v1
 
       - name: Install dependencies and run tests
-        run: npm install && npm test
+        run: npm i -D @playwright/test && npx playwright install && npm test
 
 

@@ -1,5 +1,5 @@
 const Constants = {
-    thinkTime : 500,
+    thinkTime : 100,
 }
 
 export default Constants;

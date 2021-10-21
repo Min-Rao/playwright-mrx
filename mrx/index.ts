@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, test as baseTest } from '@playwright/test';
 import { LoginPage } from './pages/login';
 import { Sitemap } from './controls/sitemap';
 import { HomeGrid } from './controls/homeGrid';
@@ -6,7 +6,7 @@ import { Ribbon } from './controls/ribbon';
 import { Dialog } from './controls/dialog';
 import { Form } from './controls/form';
 
-export class Mrx{
+class Mrx{
     private readonly page: Page;
     readonly sitemap: Sitemap;
     readonly homeGrid: HomeGrid;
@@ -26,10 +26,16 @@ export class Mrx{
 
     get action() {
         return {
-            login: async (url, username, password) => {
+            login: async (url: string, username?:string, password?:string) => {
                 const loginPage = new LoginPage(this.page, url, username, password);
                 await loginPage.login();
             }
         }
     }
 }
+
+const test = baseTest.extend<{mrx: Mrx}>({
+    mrx: async ({page}, use) => {await use(new Mrx(page));}
+});
+
+export default test;
